@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图书系统</title>
+    <link rel="stylesheet" href="./css/lab3-2503-098-index.css">
+    <style>
+        /* 登录注册模态框基础样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-box {
+            background: #fff;
+            width: 380px;
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+        .modal-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-item {
+            margin-bottom: 18px;
+        }
+        .form-item label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-item input {
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .btn {
+            width: 100%;
+            height: 42px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .to-reg, .to-login {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .to-reg a, .to-login a {
+            color: #3498db;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <div class="header">
+        <div class="logo">春韵书店</div>
+        <ul class="nav">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">图书分类</a></li>
+            <li><a href="#">新书上架</a></li>
+            <li><a href="#" id="loginBtn">登录</a></li>
+            <li><a href="#" id="regBtn">注册</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="left-sidebar">
+            <h3>图书分类</h3>
+            <ul>
+                <li><a href="#">文学小说</a></li>
+                <li><a href="#">科技计算机</a></li>
+                <li><a href="#">经管励志</a></li>
+                <li><a href="#">少儿读物</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <section>
+                <h3>图书展示区</h3>
+                <div class="book-list">
+                    <div class="book-item">
+                        <img src="./img/book1.jpg" alt="封面">
+                    </div>
+                    <div class="book-item">
+                        <img src="./img/book2.jpg" alt="封面">
+                    </div>
+                </div>
+            </section>
+
+            <section class="hot-recommend">
+            <h3>热门推荐</h3>
+                <div class="hot-list">
+                    <div class="hot-item">《三体》</div>
+                    <div class="hot-item">《活着》</div>
+                    <div class="hot-item">《平凡的世界》</div>
+                </div>
+            </section>
+
+            <section class="new-books">
+                <h3>新书上市</h3>
+                <table border="1">
+                    <tr>
+                        <th>书名</th>
+                        <th>作者</th>
+                        <th>价格</th>
+                    </tr>
+                    <tr>
+                        <td>《鲁滨逊漂流记》</td>
+                        <td>迪福</td>
+                        <td>￥39.9</td>
+                    </tr>
+                    <tr>
+                        <td>巴黎圣母院</td>
+                        <td>雨果</td>
+                        <td>￥45.9</td>
+                    </tr>
+                </table>
+            </section>
+
+            <aside class="right-sidebar">
+                <div class="promo-box">
+                    <h3>限时促销</h3>
+                    <p>满100减20</p>
+                    <p>全场图书8折起</p>
+                </div>
+            </aside>
+        </div>
+        <aside class="right-sidebar">
+            <div class="promo-box">
+                <h3>限时促销</h3>
+                <p>满100减20</p>
+                <p>全场图书8折起</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-box">
+            <span class="modal-close" id="closeLogin">×</span>
+            <h2>用户登录</h2>
+            <div class="form-item">
+                <label>用户名</label>
+                <input type="text" placeholder="请输入用户名">
+            </div>
+            <div class="form-item">
+                <label>密码</label>
+                <input type="password" placeholder="请输入密码">
+            </div>
+            <button class="btn">登录</button>
+            <div class="to-reg">
+                没有账号？<a id="goToReg">立即注册</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册模态框 -->
+    <div class="modal" id="regModal">
+        <div class="modal-box">
+            <span class="modal-close" id="closeReg">×</span>
+            <h2>用户注册</h2>
+            <div class="form-item">
+                <label>用户名</label>
+                <input type="text" placeholder="请输入用户名">
+            </div>
+            <div class="form-item">
+                <label>密码</label>
+                <input type="password" placeholder="请输入密码">
+            </div>
+            <div class="form-item">
+                <label>确认密码</label>
+                <input type="password" placeholder="请再次输入密码">
+            </div>
+            <button class="btn">注册</button>
+            <div class="to-login">
+                已有账号？<a id="goToLogin">立即登录</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取元素
+        const loginBtn = document.getElementById('loginBtn');
+        const regBtn = document.getElementById('regBtn');
+        const loginModal = document.getElementById('loginModal');
+        const regModal = document.getElementById('regModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const closeReg = document.getElementById('closeReg');
+        const goToReg = document.getElementById('goToReg');
+        const goToLogin = document.getElementById('goToLogin');
+
+        // 打开登录
+        loginBtn.onclick = () => {
+            loginModal.classList.add('show');
+            regModal.classList.remove('show');
+        };
+        // 打开注册
+        regBtn.onclick = () => {
+            regModal.classList.add('show');
+            loginModal.classList.remove('show');
+        };
+        // 关闭登录
+        closeLogin.onclick = () => {
+            loginModal.classList.remove('show');
+        };
+        // 关闭注册
+        closeReg.onclick = () => {
+            regModal.classList.remove('show');
+        };
+        // 去注册
+        goToReg.onclick = () => {
+            loginModal.classList.remove('show');
+            regModal.classList.add('show');
+        };
+        // 去登录
+        goToLogin.onclick = () => {
+            regModal.classList.remove('show');
+            loginModal.classList.add('show');
+        };
+    </script>
+</body>
+</html>
